@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { useDebounce } from '@/hooks/useDebounce';
 import { cn } from '@/lib/utils';
-import { emails } from '@/utils/emails';
 import { createClient } from '@/utils/supabase/client';
 import { Loader2, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -142,21 +141,14 @@ export const InviteUsers = ({
         user: selectedUser,
       } as MemberWithUser;
 
-      // Send invitation email
-      await emails.sendProjectInvitation({
-        to: selectedUser.email,
-        projectId,
-        role,
-        username: selectedUser.name,
-        projectName,
-        invitedByUsername: currentUser?.name || '',
-      });
+      // TODO: Implement email invitation system
+      // Email invitation functionality removed
 
       onMemberAdded?.(newMember);
 
       toast({
         title: 'Success',
-        description: 'Invitation sent successfully',
+        description: 'User added successfully',
       });
 
       // Reset form
