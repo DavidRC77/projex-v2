@@ -35,7 +35,7 @@ export const auth = {
       email,
       password,
       options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || location.origin}/auth/callback`,
       },
     });
 
@@ -83,7 +83,7 @@ export const auth = {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback?next=${nextUrl || '/'}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || location.origin}/auth/callback?next=${nextUrl || '/'}`,
       },
     });
     if (error) throw error;
@@ -120,7 +120,7 @@ export const auth = {
       };
     }
 
-    const resetLink = `${location.origin}/auth/reset-password`;
+    const resetLink = `${process.env.NEXT_PUBLIC_SITE_URL || location.origin}/auth/reset-password`;
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: resetLink,
     });
