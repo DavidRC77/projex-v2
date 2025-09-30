@@ -80,10 +80,11 @@ export const auth = {
 
   // OAuth Sign In (Google, GitHub)
   async signInWithOAuth(provider: 'github' | 'google', nextUrl?: string) {
+    const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://projex-dw2.vercel.app';
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || location.origin}/auth/callback?next=${nextUrl || '/'}`,
+        redirectTo: `${redirectUrl}/auth/callback?next=${nextUrl || '/'}`,
       },
     });
     if (error) throw error;
